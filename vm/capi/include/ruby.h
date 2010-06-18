@@ -839,6 +839,8 @@ VALUE rb_uint2big(unsigned long number);
   double  rb_big2dbl(VALUE obj);
 
   int     rb_big_bytes_used(VALUE obj);
+
+  int     rb_big_sign(VALUE obj);
 #define RBIGNUM_LEN(obj) rb_big_bytes_used(obj)
 
   // fake out, used with RBIGNUM_LEN anyway, which provides
