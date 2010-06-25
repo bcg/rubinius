@@ -589,6 +589,9 @@ VALUE rb_uint2big(unsigned long number);
 /** The pointer to the array's data. */
 #define RARRAY_PTR(ary)   (RARRAY(ary)->ptr)
 
+/** The sign of the Bignum */
+#define RBIGNUM_SIGN(o)   rb_big_sign(o)
+
 /** The source pattern for a regex. */
 #define RREGEXP_SRC(reg)  rb_reg_source(reg)
 

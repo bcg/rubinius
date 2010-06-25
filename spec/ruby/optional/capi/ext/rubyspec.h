@@ -32,6 +32,7 @@
 #define HAVE_RB_BIG2LONG                   1
 #define HAVE_RB_BIG2STR                    1
 #define HAVE_RB_BIG2ULONG                  1
+#define HAVE_RB_BIGNUM_SIGN                1
 
 // Class
 #define HAVE_RB_CALL_SUPER                 1
