@@ -104,4 +104,12 @@ describe "CApiBignumSpecs" do
       @s.rb_big2str(ensure_bignum(4611686018427387904), 16).eql?("4000000000000000").should == true
     end
   end
+
+  describe "RBIGNUM_SIGN" do
+    it "returns the sign of the number" do
+      @s.RBIGNUM_SIGN(ensure_bignum(@max_long)).should == 0
+      @s.RBIGNUM_SIGN(ensure_bignum(@min_long)).should == -1
+      @s.RBIGNUM_SIGN(ensure_bignum(@max_ulong)).should == 0
+    end
+  end
 end
