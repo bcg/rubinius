@@ -351,9 +351,9 @@ struct RFloat {
 
 #define RFLOAT(d)       capi_rfloat_struct(d)
 
-// To provide nicer error reporting
-#define RHASH(obj) assert("RHASH() is not supported")
-#define RHASH_TBL(obj) assert("RHASH_TBL() is not supported")
+// Do not define these messages as strings. We want a syntax error.
+#define RHASH(obj)      ({ C-API RHASH() is not supported in Rubinius })
+#define RHASH_TBL(obj)  ({ C-API RHASH_TBL() is not supported in Rubinius })
 
 struct RIO {
   VALUE handle;
@@ -1362,6 +1362,9 @@ VALUE rb_uint2big(unsigned long number);
 
   /** Returns a Struct with the specified fields. */
   VALUE rb_struct_define(const char *name, ...);
+
+  /** Sets the $KCODE variable. */
+  void    rb_set_kcode(const char *code);
 
   /** Returns a pointer to a persistent char [] that contains the same data as
    * that contained in the Ruby string. The buffer is flushed to the string

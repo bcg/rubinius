@@ -70,7 +70,7 @@ module Rubinius
       if obj.kind_of? Autoload
         obj = obj.call(true)
 
-        # See commend above about autoload returning nil
+        # See comment above about autoload returning nil
         unless obj
           obj = Module.new
           obj.set_name_if_necessary name, mod
@@ -78,8 +78,8 @@ module Rubinius
         end
       end
 
-      unless obj.kind_of? Module
-        raise TypeError, "#{name} is not a class"
+      unless obj.instance_of? Module
+        raise TypeError, "#{name} is not a module"
       end
     end
     return obj
@@ -110,8 +110,6 @@ module Rubinius
           raise TypeError, "Unable to define singleton methods on Numerics"
         end
       end
-    elsif mod.kind_of? Class and executable.kind_of? CompiledMethod
-      mod.add_ivars(executable)
     end
 
     add_method name, executable, mod, vis
@@ -159,6 +157,11 @@ module Rubinius
         obj.singleton_method_added(name)
       end
     else
+      case executable
+      when CompiledMethod, AccessVariable
+        mod.add_ivars(executable)
+      end
+
       Rubinius.privately do
         mod.method_added(name)
       end
@@ -259,6 +262,10 @@ module Rubinius
 
   def self.compile_file(name)
     Compiler.compile name
+  end
+
+  class AccessVariable
+    attr_reader :name
   end
 end
 
