@@ -133,6 +133,9 @@ extern "C" {
 
     Bignum* big = c_as<Bignum>(env->get_object(obj));
 
-    return big->mp_val()->sign;
+    if (big->mp_val()->sign == MP_NEG) {
+      return -1;
+    }
+    return 1;
   }
 }
